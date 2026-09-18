@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>تطبيق الطقس والفلك - Weather App</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- خط Cairo لتنسيق النصوص العربية والإنكليزية -->
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+<div class="card-container">
+
+    <!-- الواجهة الأولى: شاشة الاختيار -->
+    <div class="view select-view active" id="selectView">
+        <div class="welcome-box">
+            <span class="app-icon">☀️</span>
+            <h2>حالة الطقس المباشرة</h2>
+            <p>اختر دولتك ومدينتك لعرض تفاصيل الجو والفلك</p>
+        </div>
+
+        <div class="select-container">
+            <!-- قائمة اختيار الدولة -->
+            <div class="select-group">
+                <label>اختر الدولة / Country:</label>
+                <select id="countrySelect">
+                    <option value="" disabled selected>-- حدد الدولة / Select Country --</option>
+                </select>
+            </div>
+
+            <!-- قائمة اختيار المحافظة -->
+            <div class="select-group">
+                <label>اختر المحافظة / City:</label>
+                <select id="citySelect" disabled>
+                    <option value="" disabled selected>-- اختر الدولة أولاً --</option>
+                </select>
+            </div>
+
+            <button id="getWeatherBtn" disabled>عرض حالة الطقس 🍃</button>
+        </div>
+
+        <div class="error" id="selectError">
+            <p>تعذر جلب البيانات، يرجى التأكد من الاتصال بالإنترنت والمحاولة مجدداً!</p>
+        </div>
+    </div>
+
+    <!-- الواجهة الثانية: شاشة تفاصيل الطقس -->
+    <div class="view weather-view" id="weatherView">
+        <button class="back-btn" id="backBtn">
+            <span>‹</span> تغيير المنطقة
+        </button>
+
+        <!-- الترويسة العلوية: المدينة / الدولة -->
+        <div class="location-header">
+            <h2 id="locationTitle">-- / --</h2>
+            <span id="locationSubTitle">-- / --</span>
+        </div>
+
+        <div class="weather-content">
+            <img src="images/clear.png" class="weather-icon" alt="حالة الطقس">
+            <h1 class="temp">--°c</h1>
+            <p class="condition-desc" id="weatherCondition">--</p>
+
+            <!-- تفاصيل الرطوبة والرياح -->
+            <div class="details">
+                <div class="col">
+                    <img src="images/humidity.png" alt="رطوبة">
+                    <div>
+                        <p class="humidity">--%</p>
+                        <p>الرطوبة / Humidity</p>
+                    </div>
+                </div>
+                <div class="col">
+                    <img src="images/wind.png" alt="رياح">
+                    <div>
+                        <p class="wind">-- km/h</p>
+                        <p>الرياح / Wind</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- تفاصيل الفلك: الشروق والغروب وصورة القمر الحقيقي -->
+            <div class="astro-card">
+                <div class="sun-times">
+                    <div class="sun-item">
+                        <span class="astro-icon">🌅</span>
+                        <div>
+                            <p class="astro-label">الشروق / Sunrise</p>
+                            <p class="astro-val" id="sunriseTime">--:--</p>
+                        </div>
+                    </div>
+                    <div class="sun-divider"></div>
+                    <div class="sun-item">
+                        <span class="astro-icon">🌇</span>
+                        <div>
+                            <p class="astro-label">الغروب / Sunset</p>
+                            <p class="astro-val" id="sunsetTime">--:--</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- صورة طور القمر الحقيقي من ناسا -->
+                <div class="moon-box">
+                    <div class="moon-info">
+                        <div class="moon-img-wrapper">
+                            <img id="moonImg" src="images/moon/55.jpg" alt="طور القمر" class="realistic-moon">
+                        </div>
+                        <div>
+                            <p class="astro-label">طور القمر / Moon Phase</p>
+                            <p class="astro-val" id="moonPhaseText">--</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>

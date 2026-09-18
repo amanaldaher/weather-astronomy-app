@@ -1,0 +1,326 @@
+* {
+  margin: 0;
+  padding: 0;
+  font-family: 'Cairo', sans-serif;
+  box-sizing: border-box;
+}
+
+body {
+  background: #0d1a12;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+}
+
+.card-container {
+  width: 90%;
+  max-width: 460px;
+  background: linear-gradient(145deg, #1b4d35, #0f2e1f);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  color: #f4fbf7;
+  border-radius: 26px;
+  padding: 35px 25px;
+  text-align: center;
+  box-shadow: 0 20px 45px rgba(0, 0, 0, 0.55);
+  backdrop-filter: blur(10px);
+  overflow: hidden;
+  position: relative;
+}
+
+/* نظام التبديل بين الواجهتين */
+.view {
+  display: none;
+  opacity: 0;
+  transform: translateY(10px);
+  transition: opacity 0.4s ease, transform 0.4s ease;
+}
+
+.view.active {
+  display: block;
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* الواجهة الأولى */
+.welcome-box {
+  margin-bottom: 25px;
+}
+
+.welcome-box .app-icon {
+  font-size: 54px;
+  display: inline-block;
+  margin-bottom: 6px;
+  filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.2));
+}
+
+.welcome-box h2 {
+  font-size: 25px;
+  font-weight: 700;
+  color: #e2f7eb;
+}
+
+.welcome-box p {
+  font-size: 14px;
+  color: #a3d9bc;
+}
+
+/* القوائم المنسدلة */
+.select-container {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.select-group {
+  display: flex;
+  flex-direction: column;
+  text-align: right;
+  gap: 6px;
+}
+
+.select-group label {
+  font-size: 13px;
+  font-weight: 600;
+  color: #c4ebd4;
+  margin-right: 4px;
+}
+
+select {
+  width: 100%;
+  height: 52px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  outline: none;
+  background: #f0fdf4;
+  color: #123321;
+  padding: 0 15px;
+  font-size: 15px;
+  font-weight: 700;
+  border-radius: 14px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+select:disabled {
+  background: #cfe8d7;
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+#getWeatherBtn {
+  height: 52px;
+  border: none;
+  outline: none;
+  background: #22c55e;
+  color: #062b15;
+  font-size: 16px;
+  font-weight: 700;
+  border-radius: 14px;
+  cursor: pointer;
+  transition: 0.3s;
+  margin-top: 10px;
+  box-shadow: 0 6px 18px rgba(34, 197, 94, 0.35);
+}
+
+#getWeatherBtn:hover:not(:disabled) {
+  background: #16a34a;
+  color: #fff;
+  transform: translateY(-2px);
+}
+
+#getWeatherBtn:disabled {
+  background: #2a4735;
+  color: #728c7b;
+  cursor: not-allowed;
+  opacity: 0.65;
+  box-shadow: none;
+}
+
+/* الواجهة الثانية */
+.back-btn {
+  background: rgba(255, 255, 255, 0.12);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  color: #d1fae5;
+  padding: 6px 14px;
+  border-radius: 20px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 20px;
+  transition: 0.2s;
+}
+
+.back-btn:hover {
+  background: rgba(255, 255, 255, 0.22);
+  color: #fff;
+}
+
+.location-header {
+  background: rgba(0, 0, 0, 0.2);
+  padding: 12px 18px;
+  border-radius: 16px;
+  margin-bottom: 15px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.location-header h2 {
+  font-size: 26px;
+  font-weight: 700;
+  color: #e6f9ee;
+}
+
+.location-header span {
+  font-size: 13px;
+  color: #9cdbb6;
+  font-weight: 600;
+}
+
+.weather-icon {
+  width: 140px;
+  margin: 10px 0;
+}
+
+.temp {
+  font-size: 72px;
+  font-weight: 700;
+  line-height: 1;
+  margin-bottom: 6px;
+  color: #ffffff;
+}
+
+.condition-desc {
+  font-size: 15px;
+  color: #a7f3d0;
+  margin-bottom: 22px;
+}
+
+/* تفاصيل الرطوبة والرياح */
+.details {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 18px;
+  padding: 16px 20px;
+}
+
+.col {
+  display: flex;
+  align-items: center;
+  text-align: right;
+  gap: 12px;
+}
+
+.col img {
+  width: 36px;
+}
+
+.humidity, .wind {
+  font-size: 20px;
+  font-weight: 700;
+  direction: ltr;
+  color: #f0fdf4;
+}
+
+.col p:last-child {
+  font-size: 12px;
+  color: #a7f3d0;
+}
+
+/* بطاقة الفلك: الشروق والغروب وطور القمر */
+.astro-card {
+  margin-top: 16px;
+  background: rgba(0, 0, 0, 0.22);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 18px;
+  padding: 15px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.sun-times {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.sun-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  text-align: right;
+}
+
+.sun-divider {
+  width: 1px;
+  height: 35px;
+  background: rgba(255, 255, 255, 0.15);
+}
+
+.astro-icon {
+  font-size: 26px;
+}
+
+.astro-label {
+  font-size: 11px;
+  color: #a7f3d0;
+  margin-bottom: 2px;
+}
+
+.astro-val {
+  font-size: 15px;
+  font-weight: 700;
+  color: #ffffff;
+  direction: ltr;
+}
+
+/* صندوق القمر وصورة ناسا المقصوصة دائرية */
+.moon-box {
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  padding-top: 12px;
+}
+
+.moon-info {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  text-align: right;
+}
+
+.moon-img-wrapper {
+  width: 58px;
+  height: 58px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.realistic-moon {
+  width: 54px;
+  height: 54px;
+  object-fit: cover;
+  border-radius: 50%; /* لقص السواد وجعل القمر دائري متناسق تماماً */
+  filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.45));
+  transition: transform 0.3s ease;
+}
+
+.realistic-moon:hover {
+  transform: scale(1.1);
+}
+
+.error {
+  background: rgba(220, 38, 38, 0.2);
+  border: 1px solid #f87171;
+  color: #fecaca;
+  border-radius: 12px;
+  padding: 12px;
+  font-size: 14px;
+  margin-top: 15px;
+  display: none;
+}
